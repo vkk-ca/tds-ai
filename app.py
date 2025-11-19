@@ -39,14 +39,17 @@ app.title = 'TDS Deduction Report Engine'
 
 def load_clients():
     if os.path.exists(clients_file):
+        logging.info(f'Loading clients from {clients_file}')
         return pd.read_csv(clients_file)
     return pd.DataFrame(columns=['client_name', 'PAN', 'address'])
 
 def save_clients(df):
+    logging.info(f'Saving clients to {clients_file}')
     df.to_csv(clients_file, index=False)
 
 def load_transactions():
     if os.path.exists(transactions_file):
+        logging.info(f'Loading transactions from {transactions_file}')
         return pd.read_csv(transactions_file)
     return pd.DataFrame(columns=[
         'transaction_id', 'client_name', 'principal_amount', 'tax_code_section',
@@ -54,6 +57,7 @@ def load_transactions():
     ])
 
 def save_transactions(df):
+    logging.info(f'Saving transactions to {transactions_file}')
     df.to_csv(transactions_file, index=False)
 
 def validate_pan(pan, existing_pans=None):
